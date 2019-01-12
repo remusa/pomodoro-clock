@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 
-import playButton from '../assets/play.svg'
-import pauseButton from '../assets/pause.svg'
-import repeatButton from '../assets/repeat.svg'
-import stopButton from '../assets/stop.svg'
+import playIcon from '../assets/play.svg'
+import pauseIcon from '../assets/pause.svg'
+import repeatIcon from '../assets/repeat.svg'
+import stopIcon from '../assets/stop.svg'
+import upIcon from '../assets/up-arrow.svg'
+import downIcon from '../assets/down-arrow.svg'
 
 class PomodoroClock extends Component {
     constructor(props) {
@@ -37,10 +39,10 @@ class PomodoroClock extends Component {
 
                 <div className='container__buttons'>
                     <button id="start_stop" className='button' >
-                        <img src={playButton}></img>
-                        <img src={pauseButton}></img>
+                        <img src={playIcon}></img>
+                        <img src={pauseIcon}></img>
                     </button>
-                    <button id="reset" className='button' ><img src={stopButton}></img></button>
+                    <button id="reset" className='button' ><img src={stopIcon}></img></button>
                 </div>
             </div>
         )
