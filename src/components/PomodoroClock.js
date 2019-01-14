@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
 import tomato from '../assets/tomato.svg'
 import playIcon from '../assets/play.svg'
@@ -9,9 +9,7 @@ import repeatIcon from '../assets/repeat.svg'
 import upIcon from '../assets/up-arrow.svg'
 import downIcon from '../assets/down-arrow.svg'
 
-
-const Button = props => {
-    return (
+const Button = props => (
         <button
             id={props.id}
             className='button'
@@ -24,14 +22,12 @@ const Button = props => {
 
         </button>
     )
-}
 
 Button.propTypes = {
-    id: PropTypes.string.isRequired
+    id: PropTypes.string.isRequired,
 }
 
-const Label = props => {
-    return (
+const Label = props => (
         <div
             id={props.label}
             className='container__length__label'
@@ -42,7 +38,6 @@ const Label = props => {
             </div>
         </div>
     )
-}
 
 Label.propTypes = {
     label: PropTypes.string.isRequired,
@@ -56,20 +51,23 @@ class PomodoroClock extends Component {
         this.state = this.initialState
 
         this.handleReset = this.handleReset.bind(this)
+        this.playAudio = this.playAudio.bind(this)
+        this.playPause = this.playPause.bind(this)
         this.decrementValue = this.decrementValue.bind(this)
         this.incrementValue = this.incrementValue.bind(this)
         this.changeTimer = this.changeTimer.bind(this)
-        this.playAudio = this.playAudio.bind(this)
     }
 
     initialState = {
         breakLength: 5,
         sessionLength: 25,
-        timer: 25
+        timer: 25,
+        currentTimer: 'Session',
     }
 
     handleReset() {
         this.setState(this.initialState)
+
         this.audioBeep.pause()
         this.audioBeep.currentTime = 0
     }
@@ -78,9 +76,7 @@ class PomodoroClock extends Component {
         this.audioBeep.play()
     }
 
-    playPause() {
-
-    }
+    playPause() {}
 
     decrementValue(e) {
         const [timer, value] = e.target.id.split('-')
@@ -119,47 +115,38 @@ class PomodoroClock extends Component {
                     src={tomato}
                     alt='Pomodoro Clock'
                     className='icon-header'
-                ></img>
+                />
 
                 <div className='container__length'>
-                    <Label
-                        label='break-label'
-                        name='Break Length'>
-
+                    <Label label='break-label' name='Break Length'>
                         <Button
-                            id="break-decrement"
+                            id='break-decrement'
                             icon={downIcon}
                             onClick={this.decrementValue}
                         />
 
-                        <div
-                            id='break-length'>
-                            {this.state.breakLength}
-                        </div>
+                        <div id='break-length'>{this.state.breakLength}</div>
 
                         <Button
-                            id="break-increment"
+                            id='break-increment'
                             icon={upIcon}
                             onClick={this.incrementValue}
                         />
                     </Label>
 
-                    <Label
-                        label='session-label'
-                        name='Session Length'>
-
+                    <Label label='session-label' name='Session Length'>
                         <Button
-                            id="session-decrement"
+                            id='session-decrement'
                             icon={downIcon}
                             onClick={this.decrementValue}
                         />
 
-                        <div
-                            id='session-length'>
+                        <div id='session-length'>
                             {this.state.sessionLength}
                         </div>
 
-                        <Button id="session-increment"
+                        <Button
+                            id='session-increment'
                             icon={upIcon}
                             onClick={this.incrementValue}
                         />
@@ -167,25 +154,16 @@ class PomodoroClock extends Component {
                 </div>
 
                 <div className='container__session'>
-                    <h3
-                        id="timer-label">
-                        Session
-                    </h3>
+                    <h3 id='timer-label'>{this.state.currentTimer}</h3>
 
-                    <div
-                        id="time-left">
-                        {this.state.timer}
-                    </div>
+                    <div id='time-left'>{this.state.timer}</div>
                 </div>
 
                 <div className='container__buttons'>
-                    <Button
-                        id="start_stop"
-                        icon={playIcon}
-                    />
+                    <Button id='start_stop' icon={playIcon} />
 
                     <Button
-                        id="reset"
+                        id='reset'
                         icon={repeatIcon}
                         onClick={this.handleReset}
                     />
@@ -195,8 +173,10 @@ class PomodoroClock extends Component {
                     id='beep'
                     preload='auto'
                     src='https://goo.gl/65cBl1'
-                    ref={(audio) => { this.audioBeep = audio }}
-                ></audio>
+                    ref={audio => {
+                        this.audioBeep = audio
+                    }}
+                />
             </div>
         )
     }

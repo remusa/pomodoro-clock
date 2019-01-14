@@ -23,6 +23,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "eslint-plugin-prettier": "^3.0.1",
     "node-sass": "^4.11.0"
   }
 }
