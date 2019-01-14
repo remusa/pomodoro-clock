@@ -58,7 +58,6 @@ class PomodoroClock extends Component {
         timer: 1500, // 25 min
         timerType: 'Session',
         timerState: 'stopped',
-        // intervalID: '',
     }
 
     handleReset() {
@@ -67,10 +66,7 @@ class PomodoroClock extends Component {
         this.audioBeep.pause()
         this.audioBeep.currentTime = 0
 
-        // if (this.state.intervalID) {
-        // this.state.intervalID.cancel()
         clearInterval(this.interval)
-        // }
     }
 
     playAudio() {
@@ -86,13 +82,11 @@ class PomodoroClock extends Component {
         // running
         else {
             this.setState({ timerState: 'stopped' })
-            // this.state.intervalID.cancel()
             clearInterval(this.interval)
         }
     }
 
     beginCountDown() {
-        // setTimeout(() => {
         this.interval = setInterval(() => {
             this.decrementTimer()
             this.phaseControl()
@@ -103,14 +97,12 @@ class PomodoroClock extends Component {
         const timer = this.state.timer
 
         if (timer < 0) {
+            clearInterval(this.interval)
+
             if (this.state.timerType === 'Session') {
-                // this.state.intervalID.cancel()
-                clearInterval(this.interval)
                 this.beginCountDown()
                 this.switchTimer(this.state.breakLength * 60, 'Break')
             } else {
-                // this.state.intervalID.cancel()
-                clearInterval(this.interval)
                 this.beginCountDown()
                 this.switchTimer(this.state.sessionLength * 60, 'Session')
             }
@@ -153,28 +145,32 @@ class PomodoroClock extends Component {
     changeTimer(timer, value) {
         // break timer
         if (timer === 'break') {
-            if (value === 'decrement' && this.state.breakLength > 1) {
+            const brk = this.state.breakLength
+
+            if (value === 'decrement' && brk > 1) {
                 this.setState({
-                    breakLength: this.state.breakLength - 1,
+                    breakLength: brk - 1,
                 })
-            } else if (value === 'increment' && this.state.breakLength < 60) {
+            } else if (value === 'increment' && brk < 60) {
                 this.setState({
-                    breakLength: this.state.breakLength + 1,
+                    breakLength: brk + 1,
                 })
             }
         }
 
         // session timer
         else if (timer === 'session') {
-            if (value === 'decrement' && this.state.sessionLength > 1) {
+            const session = this.state.sessionLength
+
+            if (value === 'decrement' && session > 1) {
                 this.setState({
-                    sessionLength: this.state.sessionLength - 1,
-                    timer: (this.state.sessionLength - 1) * 60,
+                    sessionLength: session - 1,
+                    timer: (session - 1) * 60,
                 })
-            } else if (value === 'increment' && this.state.sessionLength < 60) {
+            } else if (value === 'increment' && session < 60) {
                 this.setState({
-                    sessionLength: this.state.sessionLength + 1,
-                    timer: (this.state.sessionLength + 1) * 60,
+                    sessionLength: session + 1,
+                    timer: (session + 1) * 60,
                 })
             }
         }
