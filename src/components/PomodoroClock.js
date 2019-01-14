@@ -97,11 +97,6 @@ class PomodoroClock extends Component {
             this.decrementTimer()
             this.phaseControl()
         }, this.state.timer)
-
-        // this.setState({
-        //     intervalID: INTERVAL,
-        // })
-        // }, this.state.timer)
     }
 
     phaseControl() {
@@ -174,14 +169,14 @@ class PomodoroClock extends Component {
             if (value === 'decrement' && this.state.sessionLength > 1) {
                 this.setState({
                     sessionLength: this.state.sessionLength - 1,
+                    timer: (this.state.sessionLength - 1) * 60,
                 })
             } else if (value === 'increment' && this.state.sessionLength < 60) {
                 this.setState({
                     sessionLength: this.state.sessionLength + 1,
+                    timer: (this.state.sessionLength + 1) * 60,
                 })
             }
-
-            this.setState({ timer: (this.state.sessionLength - 1) * 60 })
         }
     }
 
