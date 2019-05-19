@@ -22,9 +22,7 @@ Button.propTypes = {
 const Label = props => (
     <div id={props.label} className='container__length__label'>
         <h3>{props.name}</h3>
-        <div className='container__length__label__children'>
-            {props.children}
-        </div>
+        <div className='container__length__label__children'>{props.children}</div>
     </div>
 )
 
@@ -180,11 +178,7 @@ class PomodoroClock extends Component {
         return (
             <div className='container'>
                 <div className='container__header'>
-                    <img
-                        src={tomato}
-                        alt='Pomodoro Clock'
-                        className='icon-header'
-                    />
+                    <img src={tomato} alt='Pomodoro Clock' className='icon-header' />
                 </div>
 
                 <div className='container__length'>
@@ -197,11 +191,7 @@ class PomodoroClock extends Component {
 
                         <div id='break-length'>{this.state.breakLength}</div>
 
-                        <Button
-                            id='break-increment'
-                            icon={upIcon}
-                            onClick={this.incrementValue}
-                        />
+                        <Button id='break-increment' icon={upIcon} onClick={this.incrementValue} />
                     </Label>
 
                     <Label label='session-label' name='Session Length'>
@@ -211,9 +201,7 @@ class PomodoroClock extends Component {
                             onClick={this.decrementValue}
                         />
 
-                        <div id='session-length'>
-                            {this.state.sessionLength}
-                        </div>
+                        <div id='session-length'>{this.state.sessionLength}</div>
 
                         <Button
                             id='session-increment'
@@ -230,17 +218,9 @@ class PomodoroClock extends Component {
                 </div>
 
                 <div className='container__buttons'>
-                    <Button
-                        id='start_stop'
-                        icon={playIcon}
-                        onClick={this.timerControl}
-                    />
+                    <Button id='start_stop' icon={playIcon} onClick={this.timerControl} />
 
-                    <Button
-                        id='reset'
-                        icon={repeatIcon}
-                        onClick={this.handleReset}
-                    />
+                    <Button id='reset' icon={repeatIcon} onClick={this.handleReset} />
                 </div>
 
                 <audio
